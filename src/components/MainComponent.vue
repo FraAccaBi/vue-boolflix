@@ -3,7 +3,7 @@
       <MovieComponent 
       :title="list.title"
       :originalTitle="list.original_title"
-      :language="list.budget"
+      :language="list.original_language"
       :score="list.vote_average"
       />
     

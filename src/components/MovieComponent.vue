@@ -2,6 +2,9 @@
   <div>
       <div class="card">
         <div class="title" >{{title}}</div>
+        <div class="original" >{{originalTitle}}</div>
+        <div class="language" >{{language}}</div>
+        <div class="score" >{{score}}</div>
       </div>
     
   </div>
@@ -15,7 +18,7 @@ export default {
     title: String,
     originalTitle: String,
     language: String,
-    score: String,
+    score: Number,
   }
 }
 </script>
