@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
-      <HeaderComponent />
-      <MainComponent />
+  <div>
+    <HeaderComponent />
+    <MainComponent />
 
     
   </div>
