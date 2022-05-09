@@ -1,10 +1,10 @@
 <template>
   <div>
-      <MovieComponent 
-      :title="list.title"
-      :originalTitle="list.original_title"
-      :language="list.original_language"
-      :score="list.vote_average"
+      <MovieComponent v-for="item in list" :key="item" 
+      :title="item.title"
+      :originalTitle="item.original_title"
+      :language="item.original_language"
+      :score="item.vote_average"
       />
     
   </div>
@@ -20,7 +20,8 @@ export default {
   },
   data(){
     return{
-      API_URL: 'https://api.themoviedb.org/3/movie/550?api_key=0e2a0dcfa359ec4e7957327e178eadfd&language=it-IT&query=spiderman&page=1&include_adult=false',
+      query:'',
+      API_URL: 'https://api.themoviedb.org/3/search/movie?api_key=0e2a0dcfa359ec4e7957327e178eadfd&language=it-IT&query=batman',
       list: null,
       error: null
     }
@@ -31,13 +32,13 @@ export default {
       .get(this.API_URL)
       .then((response) =>{
         console.log(response);
-        this.list = response.data;
+        this.list = response.data.results;
         console.log(this.list);
       })
       .catch((error)=>{
         console.error();
         error;
-        this.error = `sorry there is a probleme! ${error}`
+        this.error = `sorry there is a problem! ${error}`
       })
     }
   },
