@@ -1,6 +1,8 @@
 <template>
   <div>
-      
+      <div class="card">
+        <div class="title" >{{title}}</div>
+      </div>
     
   </div>
 </template>
@@ -9,8 +11,11 @@
 
 export default {
   name: 'MovieComponent',
-  components: {
-    
+  props: {
+    title: String,
+    originalTitle: String,
+    language: String,
+    score: String,
   }
 }
 </script>

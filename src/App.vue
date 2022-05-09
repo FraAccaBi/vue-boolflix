@@ -12,7 +12,7 @@ import HeaderComponent from "@/components/HeaderComponent.vue"
 import MainComponent from "@/components/HeaderComponent.vue"
 
 export default {
-  name: 'SiteComponent',
+  name: 'App',
   components: {
     HeaderComponent,
     MainComponent
