@@ -21,8 +21,8 @@ export default {
   data(){
     return{
       API_URL: 'https://api.themoviedb.org/3/movie/550?api_key=0e2a0dcfa359ec4e7957327e178eadfd&language=it-IT&query=spiderman&page=1&include_adult=false',
-      list= null,
-      error=null
+      list: null,
+      error: null
     }
   },
   methods: {
@@ -30,7 +30,8 @@ export default {
       axios
       .get(this.API_URL)
       .then((response) =>{
-        this.list = response.data.response;
+        console.log(response);
+        this.list = response.data;
         console.log(this.list);
       })
       .catch((error)=>{
