@@ -1,7 +1,13 @@
 <template>
   <div>
     <input type="text" v-model="textSearch" >
+    <select name="lang" v-model="language">
+      <option value="it-IT">Italiano</option>
+      <option value="en-US">Inglese</option>
+      <option value="fr-FR">Francese</option>
+    </select>
     <button @click=checkInput()>Search</button>
+
     <MovieComponent v-for="item in list" :key="item.id" 
     :img="item.poster_path"
     :title="item.title"
@@ -23,12 +29,12 @@ export default {
   },
   data(){
     return{
-      API_URL: 'https://api.themoviedb.org/3/search/movie?api_key=0e2a0dcfa359ec4e7957327e178eadfd&language=it-IT&query=',
+      API_URL: 'https://api.themoviedb.org/3/search/movie?api_key=0e2a0dcfa359ec4e7957327e178eadfd',
       list: null,
       error: null,
       textSearch: '',
-      API_URL_WITH_PARAMETERS: ''
-      
+      API_URL_WITH_PARAMETERS: '',
+      language:'it-IT'
     }
   },
   methods: {
@@ -49,7 +55,8 @@ export default {
     getInput(){
       console.log(this.textSearch);
       console.log('BANANA');
-      this.API_URL_WITH_PARAMETERS = `${this.API_URL}${this.textSearch}`
+      this.API_URL_WITH_PARAMETERS = `${this.API_URL}&language=${this.language}&query=${this.textSearch}`
+      console.log(this.API_URL_WITH_PARAMETERS);
       this.callAPI()
     },
     checkInput(){
