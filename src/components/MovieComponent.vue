@@ -4,7 +4,7 @@
         <img src="`https://image.tmdb.org/t/p/original/ + ${img}`" alt="">
         <div class="title" >{{title}}</div>
         <div class="original" >{{originalTitle}}</div>
-        <div class="language" >{{language}}</div>
+        <div class="country" ><country-flag :country=country size='medium'/></div>
         <div class="score" >{{score}}</div>
       </div>
     
@@ -19,7 +19,7 @@ export default {
     img: String,
     title: String,
     originalTitle: String,
-    language: String,
+    country: String,
     score: Number,
   }
 }

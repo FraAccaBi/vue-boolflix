@@ -1,8 +1,11 @@
 <template>
   <div>
     <input type="text" v-model="textSearch" >
+
+
+    <CountryFlag country='fr' size='medium'/>
     <select name="lang" v-model="language">
-      <option value="it-IT">Italiano</option>
+      <option value="it-IT">Italian</option>
       <option value="en-US">Inglese</option>
       <option value="fr-FR">Francese</option>
     </select>
@@ -12,7 +15,7 @@
     :img="item.poster_path"
     :title="item.title"
     :originalTitle="item.original_title"
-    :language="item.original_language"
+    :country="item.original_language"
     :score="item.vote_average"
     />
     
@@ -22,10 +25,12 @@
 <script>
 import axios from "axios";
 import MovieComponent from "@/components/MovieComponent.vue";
+import CountryFlag from 'vue-country-flag'
 export default {
   name: 'MainComponent',
   components: {
-    MovieComponent
+    MovieComponent,
+    CountryFlag
   },
   data(){
     return{
@@ -55,7 +60,7 @@ export default {
     getInput(){
       console.log(this.textSearch);
       console.log('BANANA');
-      this.API_URL_WITH_PARAMETERS = `${this.API_URL}&language=${this.language}&query=${this.textSearch}`
+      this.API_URL_WITH_PARAMETERS = `${this.API_URL}&language=${this.country}&query=${this.textSearch}`
       console.log(this.API_URL_WITH_PARAMETERS);
       this.callAPI()
     },
