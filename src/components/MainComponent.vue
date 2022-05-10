@@ -3,12 +3,13 @@
     <input type="text" v-model="textSearch" >
     <button @click=checkInput()>Search</button>
     <MovieComponent v-for="item in list" :key="item.id" 
-    :country="item.original_language"
+    :country="countryflag[0]"
     :title="item.title"
     :originalTitle="item.original_title"
     :language="item.original_language"
     :score="item.vote_average"
     />
+
     
   </div>
 </template>
@@ -30,8 +31,7 @@ export default {
       textSearch: '',
       API_URL_WITH_PARAMETERS: '',
       country:'it',
-      countryflag: [],
-      countryCheck: ''
+      countryflag: []
       }
   },
   methods: {

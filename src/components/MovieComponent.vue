@@ -4,7 +4,7 @@
         
         <div class="title" >{{title}}</div>
         <div class="original" >{{originalTitle}}</div>
-        <div class="language"><country-flag :country=language size='normal'/>{{language}}</div>
+        <div class="language"><country-flag :country=country size='normal'/>{{language}}</div>
         <div class="score" >{{score}}</div>
       </div>
     
