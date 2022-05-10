@@ -30,7 +30,8 @@ export default {
       textSearch: '',
       API_URL_WITH_PARAMETERS: '',
       country:'it',
-      countryflag: []
+      countryflag: [],
+      countryCheck: ''
       }
   },
   methods: {
@@ -39,9 +40,13 @@ export default {
       .get(this.API_URL_WITH_PARAMETERS)
       .then((response) =>{
         for (let i = 0; i < response.data.results.length; i++) {
+          if (response.data.results[i].original_language ===  'en') {
+            this.countryflag.push('gb')
+          } else {
           this.countryflag.push(response.data.results[i].original_language);
-          console.log(this.countryflag,1);
+          }
         }
+        console.log(this.countryflag,1);
         
         this.list = response.data.results;
         //this.countryflag.push = response.data.results.
