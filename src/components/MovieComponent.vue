@@ -1,10 +1,10 @@
 <template>
   <div>
       <div class="card">
-        <img src="`https://image.tmdb.org/t/p/original/ + ${img}`" alt="">
+        
         <div class="title" >{{title}}</div>
         <div class="original" >{{originalTitle}}</div>
-        <div class="country" ><country-flag :country=country size='medium'/></div>
+        <div class="language"><country-flag :country=language size='normal'/>{{language}}</div>
         <div class="score" >{{score}}</div>
       </div>
     
@@ -16,12 +16,12 @@
 export default {
   name: 'MovieComponent',
   props: {
-    img: String,
+    country: String,
     title: String,
     originalTitle: String,
-    country: String,
+    language: String,
     score: Number,
-  }
+  },
 }
 </script>
 

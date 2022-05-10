@@ -1,21 +1,12 @@
 <template>
   <div>
     <input type="text" v-model="textSearch" >
-
-
-    <CountryFlag country='fr' size='medium'/>
-    <select name="lang" v-model="language">
-      <option value="it-IT">Italian</option>
-      <option value="en-US">Inglese</option>
-      <option value="fr-FR">Francese</option>
-    </select>
     <button @click=checkInput()>Search</button>
-
     <MovieComponent v-for="item in list" :key="item.id" 
-    :img="item.poster_path"
+    :country="item.original_language"
     :title="item.title"
     :originalTitle="item.original_title"
-    :country="item.original_language"
+    :language="item.original_language"
     :score="item.vote_average"
     />
     
@@ -25,12 +16,11 @@
 <script>
 import axios from "axios";
 import MovieComponent from "@/components/MovieComponent.vue";
-import CountryFlag from 'vue-country-flag'
+
 export default {
   name: 'MainComponent',
   components: {
-    MovieComponent,
-    CountryFlag
+    MovieComponent,   
   },
   data(){
     return{
@@ -39,7 +29,7 @@ export default {
       error: null,
       textSearch: '',
       API_URL_WITH_PARAMETERS: '',
-      language:'it-IT'
+      country:'it',
     }
   },
   methods: {
@@ -47,9 +37,9 @@ export default {
       axios
       .get(this.API_URL_WITH_PARAMETERS)
       .then((response) =>{
-        console.log(response);
+        //console.log(response);
         this.list = response.data.results;
-        console.log(this.list);
+        
       })
       .catch((error)=>{
         console.error(error);
@@ -59,10 +49,10 @@ export default {
     },
     getInput(){
       console.log(this.textSearch);
-      console.log('BANANA');
       this.API_URL_WITH_PARAMETERS = `${this.API_URL}&language=${this.country}&query=${this.textSearch}`
-      console.log(this.API_URL_WITH_PARAMETERS);
+      //console.log(this.API_URL_WITH_PARAMETERS);
       this.callAPI()
+      this.textSearch = ''
     },
     checkInput(){
       this.list = null;
@@ -73,6 +63,7 @@ export default {
         console.log(this.error);
       }
     }
+
   },
   mounted(){
     
