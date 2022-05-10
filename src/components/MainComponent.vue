@@ -2,8 +2,8 @@
   <div>
     <input type="text" v-model="textSearch" >
     <button @click=checkInput()>Search</button>
-    <MovieComponent v-for="item in list" :key="item.id" 
-    :country="countryflag[0]"
+    <MovieComponent v-for="(item, index) in list" :key="index" 
+    :country="countryflag[index]"
     :title="item.title"
     :originalTitle="item.original_title"
     :language="item.original_language"
@@ -49,7 +49,7 @@ export default {
         console.log(this.countryflag,1);
         
         this.list = response.data.results;
-        //this.countryflag.push = response.data.results.
+        console.log(this.list);
       })
       .catch((error)=>{
         console.error(error);
