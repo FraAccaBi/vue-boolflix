@@ -9,6 +9,13 @@
     :language="item.original_language"
     :score="item.vote_average"
     />
+    <SerieComponent v-for="(item, index) in seriesList" :key="index" 
+    :country="countryflag[index]"
+    :title="item.title"
+    :originalTitle="item.original_title"
+    :language="item.original_language"
+    :score="item.vote_average"
+    />
 
     
   </div>
@@ -17,40 +24,49 @@
 <script>
 import axios from "axios";
 import MovieComponent from "@/components/MovieComponent.vue";
+import SerieComponent from "@/components/SerieComponent.vue";
 
 export default {
   name: 'MainComponent',
   components: {
-    MovieComponent,   
+    MovieComponent,  
+    SerieComponent 
   },
   data(){
     return{
-      API_URL: 'https://api.themoviedb.org/3/search/movie?api_key=0e2a0dcfa359ec4e7957327e178eadfd',
+      API_URL: 'https://api.themoviedb.org/3/search/movie?api_key=0e2a0dcfa359ec4e7957327e178eadfd&language=it_IT&query=',
+      API_SERIES_URL: 'https://api.themoviedb.org/3/search/tv?api_key=0e2a0dcfa359ec4e7957327e178eadfd&language=it_IT&query=',
       list: null,
+      seriesList:null,
       error: null,
       textSearch: '',
       API_URL_WITH_PARAMETERS: '',
+      API_SERIES_URL_PARAMETERS:'',
       country:'it',
       countryflag: []
       }
   },
   methods: {
     callAPI(){
+      const requestOne = axios.get(this.API_URL_WITH_PARAMETERS);
+      const requestTwo = axios.get(this.API_SERIES_URL_PARAMETERS);
+      //console.log(requestTwo);
       axios
-      .get(this.API_URL_WITH_PARAMETERS)
-      .then((response) =>{
-        for (let i = 0; i < response.data.results.length; i++) {
-          if (response.data.results[i].original_language ===  'en') {
+      .all([requestOne, requestTwo])
+      .then(axios.spread((...responses) =>{
+        //console.log(responses);
+        for (let i = 0; i < responses[0].data.results.length; i++) {
+          if (responses[0].data.results[i].original_language ===  'en') {
             this.countryflag.push('gb')
           } else {
-          this.countryflag.push(response.data.results[i].original_language);
+          this.countryflag.push(responses[0].data.results[i].original_language);
           }
         }
-        console.log(this.countryflag,1);
         
-        this.list = response.data.results;
-        console.log(this.list);
-      })
+        this.list = responses[0].data.results;
+        this.seriesList = responses[1].data.results
+        console.log(this.seriesList);
+      }))
       .catch((error)=>{
         console.error(error);
         error;
@@ -59,7 +75,8 @@ export default {
     },
     getInput(){
       console.log(this.textSearch);
-      this.API_URL_WITH_PARAMETERS = `${this.API_URL}&language=${this.country}&query=${this.textSearch}`
+      this.API_URL_WITH_PARAMETERS = `${this.API_URL}${this.textSearch}`;
+      this.API_SERIES_URL_PARAMETERS = `${this.API_SERIES_URL}${this.textSearch}`
       //console.log(this.API_URL_WITH_PARAMETERS);
       this.callAPI()
       this.textSearch = ''
