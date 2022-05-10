@@ -30,16 +30,17 @@ export default {
       textSearch: '',
       API_URL_WITH_PARAMETERS: '',
       country:'it',
-    }
+      countryflag: []
+      }
   },
   methods: {
     callAPI(){
       axios
       .get(this.API_URL_WITH_PARAMETERS)
       .then((response) =>{
-        //console.log(response);
+        console.log(response.data);
         this.list = response.data.results;
-        
+        //this.countryflag.push = response.data.results.
       })
       .catch((error)=>{
         console.error(error);
