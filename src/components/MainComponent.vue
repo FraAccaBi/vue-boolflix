@@ -58,14 +58,19 @@ export default {
       axios
       .all([requestOne, requestTwo])
       .then(axios.spread((...responses) =>{
-        console.log(responses);
-        for (let i = 0; i < responses[0].data.results.length; i++) {
-          if (responses[0].data.results[i].original_language ===  'en') {
+        let responseMovie = responses[0].data.results
+        let responseSerie = responses[1].data.results
+        console.log(responseMovie, 'responseMovie');
+        console.log(responseSerie, 'responseSerie');
+        for (let i = 0; i < responseMovie.length; i++) {
+          if (responseMovie[i].original_language ===  'en') {
             this.countryflag.push('gb')
           } else {
-          this.countryflag.push(responses[0].data.results[i].original_language);
+          this.countryflag.push(responseMovie[i].original_language);
           }
         }
+        this.list = responseMovie
+        //console.log(this.list);
         for (let i = 0; i < responses[1].data.results.length; i++) {
           if (responses[1].data.results[i].original_language ===  'en') {
             this.countryflagSeries.push('gb')
@@ -93,15 +98,15 @@ export default {
       //console.log(this.API_URL_WITH_PARAMETERS);
 
       this.callAPI()
-      console.log(this.seriesList, 'lista delle serie');
-      console.log(this.list, 'lista dei film');
+      //console.log(this.seriesList, 'lista delle serie');
+      //console.log(this.list, 'lista dei film');
       //this.textSearch = ''
       }
     },
     computed: {
        filtered(){
         this.getInput()
-        console.log(this.list, 100);
+        //console.log(this.list, 100);
         if(this.textSearch != '') {
           return this.list.filter(movie => {
             return movie.title.toLowerCase().includes(this.textSearch.toLowerCase())
