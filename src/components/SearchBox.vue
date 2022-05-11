@@ -1,7 +1,21 @@
 <template>
   <div>
-      
+    <form @submit.prevent="$emit('formSubmit')">
+      <input 
+        type="search" 
+        :value="textSearch"
+        @input="$emit('input', $event.target.value)" 
+        @keyup="$emit('formSubmit', textSearch)"
+      />
+      <button 
+        type="submit"
+        :disabled="textSearch < 1"
+      >
+        Search
+      </button>
     
+    </form>
+      
   </div>
 </template>
 
@@ -9,11 +23,9 @@
 
 export default {
   name: 'SearchBox',
+  
   props: {
-    title: String,
-    originalTitle: String,
-    language: String,
-    score: String
+    textSearch: String
   }
 }
 </script>

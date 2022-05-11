@@ -1,16 +1,17 @@
 <template>
   <div>
-    <input type="text" v-model="textSearch" >
-    <button @click=checkInput()>Search</button>
-    <MovieComponent v-for="(item, index) in list" :key="index"
-    :img="item.poster_path" 
+    <!-- <input type="text" v-model="textSearch" >
+    <button @click=checkInput()>Search</button> -->
+    <MovieComponent v-for="(movie, index) in filtered" :key="index"
+    :img="movie.poster_path" 
     :country="countryflag[index]"
-    :title="item.title"
-    :originalTitle="item.original_title"
-    :language="item.original_language"
-    :score="item.vote_average"
+    :title="movie.title"
+    :originalTitle="movie.original_title"
+    :language="movie.original_language"
+    :score="movie.vote_average"
     />
-    <SerieComponent v-for="(item, index) in seriesList" :key="index" 
+    <SerieComponent v-for="(item, index) in seriesList" :key="index"
+    :img="item.poster_path" 
     :country="countryflagSeries[index]"
     :title="item.name"
     :originalTitle="item.original_name"
@@ -24,6 +25,7 @@
 
 <script>
 import axios from "axios";
+import state from "@/state.js";
 import MovieComponent from "@/components/MovieComponent.vue";
 import SerieComponent from "@/components/SerieComponent.vue";
 
@@ -40,7 +42,7 @@ export default {
       list: null,
       seriesList:null,
       error: null,
-      textSearch: '',
+      /* textSearch: '', */
       API_URL_WITH_PARAMETERS: '',
       API_SERIES_URL_PARAMETERS:'',
       country:'it',
@@ -95,16 +97,28 @@ export default {
       this.list = null;
       if (this.textSearch != '') {
         this.getInput()
+        this.filtered()
       } else {
         this.error = 'immetti qualcosa nella barra di ricerca'
         console.log(this.error);
       }
+    },
+    filtered(){
+    console.log(state);
+    console.log(this.list);
+      if(state.textSearch) {
+        return this.list.filter(movie => {
+          return movie.title.toLowerCase().includes(state.textSearch.toLowerCase())
+        })
+        
+      } 
+      else {
+        return this.list
+      }
     }
 
-  },
-  mounted(){
-    
   }
+  
 }
 </script>
 

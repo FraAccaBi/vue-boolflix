@@ -12,7 +12,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'MovieComponent',
   props: {
@@ -23,6 +22,7 @@ export default {
     language: String,
     score: Number,
   },
+
 }
 </script>
 
