@@ -86,7 +86,8 @@ export default {
       })
     },
     getInput(){
-      //console.log(this.textSearch);
+      state.textSearch = this.textSearch;
+      console.log(this.textSearch);
       this.API_URL_WITH_PARAMETERS = `${this.API_URL}${this.textSearch}`;
       console.log(this.API_URL_WITH_PARAMETERS);
       this.API_SERIES_URL_PARAMETERS = `${this.API_SERIES_URL}${this.textSearch}`
@@ -104,7 +105,12 @@ export default {
         console.log(this.error);
       }
     },
-    filtered(){
+   
+     
+      
+    },
+    computed: {
+       filtered(){
     //console.log(state);
     //console.log(this.list);
       if(state.textSearch) {
@@ -116,9 +122,19 @@ export default {
       else {
         return this.list
       }
+      
+    }
+    },
+    created(){ 
+      
+       if (state.textSearch != '') {
+         console.log('una vittoria');
+       } else {
+         console.log('still a victory');
+       }
     }
 
-  }
+  
   
 }
 </script>
