@@ -97,9 +97,9 @@ export default {
     },
     checkInput(){
       this.list = null;
-      if (this.textSearch != '') {
+      if (state.textSearch != '') {
         this.getInput()
-        this.filtered()
+        
       } else {
         this.error = 'immetti qualcosa nella barra di ricerca'
         console.log(this.error);
@@ -113,6 +113,7 @@ export default {
        filtered(){
     //console.log(state);
     //console.log(this.list);
+      this.checkInput()
       if(state.textSearch) {
         return this.list.filter(movie => {
           return movie.title.toLowerCase().includes(state.textSearch.toLowerCase())
