@@ -39,8 +39,8 @@ export default {
     return{
       API_URL: 'https://api.themoviedb.org/3/search/movie?api_key=0e2a0dcfa359ec4e7957327e178eadfd&language=it_IT&query=',
       API_SERIES_URL: 'https://api.themoviedb.org/3/search/tv?api_key=0e2a0dcfa359ec4e7957327e178eadfd&language=it_IT&query=',
-      list: null,
-      seriesList:null,
+      list: [],
+      seriesList:[],
       error: null,
       /* textSearch: '', */
       API_URL_WITH_PARAMETERS: '',
@@ -58,7 +58,7 @@ export default {
       axios
       .all([requestOne, requestTwo])
       .then(axios.spread((...responses) =>{
-        //console.log(responses);
+        console.log(responses);
         for (let i = 0; i < responses[0].data.results.length; i++) {
           if (responses[0].data.results[i].original_language ===  'en') {
             this.countryflag.push('gb')
@@ -74,9 +74,9 @@ export default {
           }
         }
         
-        this.list = responses[0].data.results;
-        this.seriesList = responses[1].data.results
-        return (this.list, this.seriesList)
+        //this.list.push(responses[0].data.results) 
+        //this.seriesList.push(responses[1].data.results) 
+        //return (this.list, this.seriesList)
       }))
       .catch((error)=>{
         console.error(error);
@@ -96,17 +96,7 @@ export default {
       console.log(this.seriesList, 'lista delle serie');
       console.log(this.list, 'lista dei film');
       //this.textSearch = ''
-    },
-   /*  checkInput(){
-      this.list = null;
-      if (state.textSearch != '') {
-        this.getInput()
-        
-      } else {
-        this.error = 'immetti qualcosa nella barra di ricerca'
-        console.log(this.error);
       }
-    },  */
     },
     computed: {
        filtered(){
