@@ -76,8 +76,7 @@ export default {
         
         this.list = responses[0].data.results;
         this.seriesList = responses[1].data.results
-        //console.log(this.seriesList);
-        //console.log(this.list);
+        return (this.list, this.seriesList)
       }))
       .catch((error)=>{
         console.error(error);
@@ -92,10 +91,13 @@ export default {
       //console.log(this.API_URL_WITH_PARAMETERS);
       this.API_SERIES_URL_PARAMETERS = `${this.API_SERIES_URL}${this.textSearch}`
       //console.log(this.API_URL_WITH_PARAMETERS);
+
       this.callAPI()
-      this.textSearch = ''
+      console.log(this.seriesList, 'lista delle serie');
+      console.log(this.list, 'lista dei film');
+      //this.textSearch = ''
     },
-    checkInput(){
+   /*  checkInput(){
       this.list = null;
       if (state.textSearch != '') {
         this.getInput()
@@ -104,12 +106,13 @@ export default {
         this.error = 'immetti qualcosa nella barra di ricerca'
         console.log(this.error);
       }
-    }, 
+    },  */
     },
     computed: {
        filtered(){
-        this.checkInput()
-        if(this.textSearch) {
+        this.getInput()
+        console.log(this.list, 100);
+        if(this.textSearch != '') {
           return this.list.filter(movie => {
             return movie.title.toLowerCase().includes(this.textSearch.toLowerCase())
           })

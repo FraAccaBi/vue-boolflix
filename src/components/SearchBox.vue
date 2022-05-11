@@ -5,7 +5,7 @@
         type="search" 
         :value="textSearch"
         @input="$emit('input', $event.target.value)" 
-        @keyup="$emit('formSubmit', textSearch)"
+        @enter="$emit('formSubmit', textSearch)"
       />
       <button 
         type="submit"
