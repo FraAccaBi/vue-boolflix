@@ -60,8 +60,8 @@ export default {
       .then(axios.spread((...responses) =>{
         let responseMovie = responses[0].data.results
         let responseSerie = responses[1].data.results
-        console.log(responseMovie, 'responseMovie');
-        console.log(responseSerie, 'responseSerie');
+        //console.log(responseMovie, 'responseMovie');
+        //console.log(responseSerie, 'responseSerie');
         for (let i = 0; i < responseMovie.length; i++) {
           if (responseMovie[i].original_language ===  'en') {
             this.countryflag.push('gb')
@@ -71,11 +71,11 @@ export default {
         }
         this.list = responseMovie
         //console.log(this.list);
-        for (let i = 0; i < responses[1].data.results.length; i++) {
-          if (responses[1].data.results[i].original_language ===  'en') {
+        for (let i = 0; i < responseSerie.length; i++) {
+          if (responseSerie[i].original_language ===  'en') {
             this.countryflagSeries.push('gb')
           } else {
-          this.countryflagSeries.push(responses[1].data.results[i].original_language);
+          this.countryflagSeries.push(responseSerie[i].original_language);
           }
         }
         
