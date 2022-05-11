@@ -1,7 +1,7 @@
 <template>
   <div>
       <div class="card">
-        <img :src='"https://image.tmdb.org/t/p/original" + img' alt="">
+        <img class="w-25" :src='"https://image.tmdb.org/t/p/original" + img' alt="" >
         <div class="title" >Movie title: {{title}}</div>
         <div class="original" >Original title: {{originalTitle}}</div>
         <div class="language"><country-flag :country=country size='normal'/>Original language: {{language}}</div>

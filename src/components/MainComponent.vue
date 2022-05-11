@@ -87,9 +87,9 @@ export default {
     },
     getInput(){
       this.textSearch = state.textSearch
-      console.log(state.textSearch, 1);
+      //console.log(state.textSearch, 1);
       this.API_URL_WITH_PARAMETERS = `${this.API_URL}${this.textSearch}`;
-      console.log(this.API_URL_WITH_PARAMETERS);
+      //console.log(this.API_URL_WITH_PARAMETERS);
       this.API_SERIES_URL_PARAMETERS = `${this.API_SERIES_URL}${this.textSearch}`
       //console.log(this.API_URL_WITH_PARAMETERS);
       this.callAPI()
