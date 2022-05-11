@@ -22,8 +22,8 @@ export default {
     search() {
       //console.log('Searching ...');
       state.textSearch = this.textSearch;
-      console.log(state.textSearch);
-    },
+      //console.log(state.textSearch);
+    }
   },
 }
 </script>

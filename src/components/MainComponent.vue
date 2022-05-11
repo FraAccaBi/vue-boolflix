@@ -76,8 +76,8 @@ export default {
         
         this.list = responses[0].data.results;
         this.seriesList = responses[1].data.results
-        console.log(this.seriesList);
-        console.log(this.list);
+        //console.log(this.seriesList);
+        //console.log(this.list);
       }))
       .catch((error)=>{
         console.error(error);
@@ -86,8 +86,9 @@ export default {
       })
     },
     getInput(){
-      console.log(this.textSearch);
+      //console.log(this.textSearch);
       this.API_URL_WITH_PARAMETERS = `${this.API_URL}${this.textSearch}`;
+      console.log(this.API_URL_WITH_PARAMETERS);
       this.API_SERIES_URL_PARAMETERS = `${this.API_SERIES_URL}${this.textSearch}`
       //console.log(this.API_URL_WITH_PARAMETERS);
       this.callAPI()
@@ -104,8 +105,8 @@ export default {
       }
     },
     filtered(){
-    console.log(state);
-    console.log(this.list);
+    //console.log(state);
+    //console.log(this.list);
       if(state.textSearch) {
         return this.list.filter(movie => {
           return movie.title.toLowerCase().includes(state.textSearch.toLowerCase())
