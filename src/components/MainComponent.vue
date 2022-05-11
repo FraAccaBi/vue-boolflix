@@ -86,8 +86,8 @@ export default {
       })
     },
     getInput(){
-      state.textSearch = this.textSearch;
-      console.log(this.textSearch);
+      this.textSearch = state.textSearch
+      console.log(state.textSearch, 1);
       this.API_URL_WITH_PARAMETERS = `${this.API_URL}${this.textSearch}`;
       console.log(this.API_URL_WITH_PARAMETERS);
       this.API_SERIES_URL_PARAMETERS = `${this.API_SERIES_URL}${this.textSearch}`
@@ -104,35 +104,22 @@ export default {
         this.error = 'immetti qualcosa nella barra di ricerca'
         console.log(this.error);
       }
-    },
-   
-     
-      
+    }, 
     },
     computed: {
        filtered(){
-    //console.log(state);
-    //console.log(this.list);
-      this.checkInput()
-      if(state.textSearch) {
-        return this.list.filter(movie => {
-          return movie.title.toLowerCase().includes(state.textSearch.toLowerCase())
-        })
-        
-      } 
-      else {
-        return this.list
-      }
+        this.checkInput()
+        if(this.textSearch) {
+          return this.list.filter(movie => {
+            return movie.title.toLowerCase().includes(this.textSearch.toLowerCase())
+          })
+          
+        } 
+        else {
+          return this.list
+        }
       
     }
-    },
-    created(){ 
-      
-       if (state.textSearch != '') {
-         console.log('una vittoria');
-       } else {
-         console.log('still a victory');
-       }
     }
 
   
