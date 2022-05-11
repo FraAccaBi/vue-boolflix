@@ -2,7 +2,8 @@
   <div>
     <input type="text" v-model="textSearch" >
     <button @click=checkInput()>Search</button>
-    <MovieComponent v-for="(item, index) in list" :key="index" 
+    <MovieComponent v-for="(item, index) in list" :key="index"
+    :img="item.poster_path" 
     :country="countryflag[index]"
     :title="item.title"
     :originalTitle="item.original_title"
@@ -10,9 +11,9 @@
     :score="item.vote_average"
     />
     <SerieComponent v-for="(item, index) in seriesList" :key="index" 
-    :country="countryflag[index]"
-    :title="item.title"
-    :originalTitle="item.original_title"
+    :country="countryflagSeries[index]"
+    :title="item.name"
+    :originalTitle="item.original_name"
     :language="item.original_language"
     :score="item.vote_average"
     />
@@ -43,7 +44,8 @@ export default {
       API_URL_WITH_PARAMETERS: '',
       API_SERIES_URL_PARAMETERS:'',
       country:'it',
-      countryflag: []
+      countryflag: [],
+      countryflagSeries: []
       }
   },
   methods: {
@@ -62,10 +64,18 @@ export default {
           this.countryflag.push(responses[0].data.results[i].original_language);
           }
         }
+        for (let i = 0; i < responses[1].data.results.length; i++) {
+          if (responses[1].data.results[i].original_language ===  'en') {
+            this.countryflagSeries.push('gb')
+          } else {
+          this.countryflagSeries.push(responses[1].data.results[i].original_language);
+          }
+        }
         
         this.list = responses[0].data.results;
         this.seriesList = responses[1].data.results
         console.log(this.seriesList);
+        console.log(this.list);
       }))
       .catch((error)=>{
         console.error(error);
