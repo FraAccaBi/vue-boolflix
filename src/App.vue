@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="background">
       <HeaderComponent class="header"/>
-      <MainComponent class="main container-fluid"/>
+      <MainComponent class="main overflow-auto"/>
 
     
   </div>
@@ -25,7 +25,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 #id{
-  height: 100vh!important;
+  
   background-color: #212529ad;
 }
 .header{
