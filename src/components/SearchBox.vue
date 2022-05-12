@@ -5,13 +5,15 @@
         type="search" 
         :value="textSearch"
         @input="$emit('input', $event.target.value)" 
-        @enter="$emit('formSubmit', textSearch)"
+        @keyup="$emit('formSubmit', textSearch)"
+        class="p-1 mx-1 rounded"
       />
       <button 
         type="submit"
         :disabled="textSearch < 1"
+        class="p-1 mx-1 rounded text-danger fw-bold"
       >
-        Search
+        SEARCH
       </button>
     
     </form>

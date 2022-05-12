@@ -1,14 +1,13 @@
 <template>
-  <div>
-    <!-- <input type="text" v-model="textSearch" >
-    <button @click=checkInput()>Search</button> -->
-    <MovieComponent v-for="(movie, index) in filtered" :key="index"
+  <div class="d-flex flex-wrap justify-content-center bg-dark">
+    <MovieComponent v-for="(movie, index) in list" :key="index"
     :img="movie.poster_path" 
     :country="countryflag[index]"
     :title="movie.title"
     :originalTitle="movie.original_title"
     :language="movie.original_language"
     :score="movie.vote_average"
+    
     />
     <SerieComponent v-for="(item, index) in seriesList" :key="index"
     :img="item.poster_path" 
@@ -18,8 +17,6 @@
     :language="item.original_language"
     :score="item.vote_average"
     />
-
-    
   </div>
 </template>
 
@@ -50,18 +47,30 @@ export default {
       countryflagSeries: []
       }
   },
+  watch: {
+    toSearch(newValue) {
+      if(newValue){
+        state.toSearch = false;
+        if(state.textSearch != '') {
+          this.getInput()
+        }
+      } 
+    }
+  },
+  computed: {
+    toSearch(){
+      return state.toSearch;
+    }
+  },
   methods: {
     callAPI(){
       const requestOne = axios.get(this.API_URL_WITH_PARAMETERS);
       const requestTwo = axios.get(this.API_SERIES_URL_PARAMETERS);
-      //console.log(requestTwo);
       axios
       .all([requestOne, requestTwo])
       .then(axios.spread((...responses) =>{
         let responseMovie = responses[0].data.results
         let responseSerie = responses[1].data.results
-        //console.log(responseMovie, 'responseMovie');
-        //console.log(responseSerie, 'responseSerie');
         for (let i = 0; i < responseMovie.length; i++) {
           if (responseMovie[i].original_language ===  'en') {
             this.countryflag.push('gb')
@@ -70,7 +79,6 @@ export default {
           }
         }
         this.list = responseMovie
-        //console.log(this.list);
         for (let i = 0; i < responseSerie.length; i++) {
           if (responseSerie[i].original_language ===  'en') {
             this.countryflagSeries.push('gb')
@@ -78,10 +86,8 @@ export default {
           this.countryflagSeries.push(responseSerie[i].original_language);
           }
         }
-        
-        //this.list.push(responses[0].data.results) 
-        //this.seriesList.push(responses[1].data.results) 
-        //return (this.list, this.seriesList)
+        this.seriesList = responseSerie
+        console.log(responseSerie, responseMovie);
       }))
       .catch((error)=>{
         console.error(error);
@@ -90,42 +96,16 @@ export default {
       })
     },
     getInput(){
+      console.log("cerco");
       this.textSearch = state.textSearch
-      //console.log(state.textSearch, 1);
       this.API_URL_WITH_PARAMETERS = `${this.API_URL}${this.textSearch}`;
-      //console.log(this.API_URL_WITH_PARAMETERS);
       this.API_SERIES_URL_PARAMETERS = `${this.API_SERIES_URL}${this.textSearch}`
-      //console.log(this.API_URL_WITH_PARAMETERS);
-
       this.callAPI()
-      //console.log(this.seriesList, 'lista delle serie');
-      //console.log(this.list, 'lista dei film');
-      //this.textSearch = ''
       }
-    },
-    computed: {
-       filtered(){
-        this.getInput()
-        //console.log(this.list, 100);
-        if(this.textSearch != '') {
-          return this.list.filter(movie => {
-            return movie.title.toLowerCase().includes(this.textSearch.toLowerCase())
-          })
-          
-        } 
-        else {
-          return this.list
-        }
-      
-    }
-    }
-
-  
-  
+  }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
 
 </style>

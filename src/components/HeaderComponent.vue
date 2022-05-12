@@ -1,6 +1,10 @@
 <template>
-  <div>
-      <SearchBox v-model="textSearch" @formSubmit="search"/>
+  <div class="p-2 bg-dark text-center">
+      <img src="../../public/logo.png" alt="">
+      <SearchBox 
+      v-model="textSearch" @formSubmit="search"
+      class="py-2"
+      />
     
   </div>
 </template>
@@ -20,9 +24,8 @@ export default {
   },
   methods: {
     search() {
-      //console.log('Searching ...');
       state.textSearch = this.textSearch;
-      //console.log(state.textSearch);
+      state.toSearch = true;
     }
   },
 }

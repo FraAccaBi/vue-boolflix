@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-      <HeaderComponent />
-      <MainComponent />
+      <HeaderComponent class="header"/>
+      <MainComponent class="main container-fluid"/>
 
     
   </div>
@@ -24,5 +24,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
+#id{
+  height: 100vh;
+}
+.header{
+  max-height: calc(100vh / 6);
+}
+.main{
+  
+  background-color: black;
+}
 </style>

@@ -1,11 +1,13 @@
 <template>
   <div>
-      <div class="card">
-        <img class="w-25" :src='"https://image.tmdb.org/t/p/original" + img' alt="">
-        <div class="title" >{{title}}</div>
-        <div class="original" >{{originalTitle}}</div>
-        <div class="language"><country-flag :country=country size='normal'/>{{language}}</div>
-        <div class="score" >{{score}}</div>
+      <div class="card position-relative">
+        <img class="serie-img" :src='"https://image.tmdb.org/t/p/original" + img' alt="">
+        <div class="hidden position-absolute bottom-0 text-light">
+          <div class="title" >{{title}}</div>
+          <div class="original" >{{originalTitle}}</div>
+          <div class="language"><country-flag :country=country size='normal'/>{{language}}</div>
+          <div class="score" >{{score}}</div>
+        </div>
       </div>
     
   </div>
