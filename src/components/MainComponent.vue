@@ -7,6 +7,7 @@
     :originalTitle="movie.original_title"
     :language="movie.original_language"
     :score="movie.vote_average"
+    :value="(movie.vote_average / 2)"
     
     />
     <SerieComponent v-for="(item, index) in seriesList" :key="index"

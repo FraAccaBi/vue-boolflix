@@ -2,7 +2,7 @@
   <div v-if="img">
       <div class="card position-relative border-0 p-2 bg-dark">
         <img class="movie-img" 
-        :src='"https://image.tmdb.org/t/p/original" + img' 
+        :src='"https://image.tmdb.org/t/p/w342" + img' 
         alt="" >
         <div class="hidden position-absolute h-100 text-light  d-flex flex-column justify-content-end pb-4">
           <div class="title text-uppercase">
@@ -13,7 +13,8 @@
             <country-flag :country=country size='small'/>
           </div>
           <div class="score">
-            Average score: {{score}}
+            Voto: <rate class="d-inline" :length="5" :value=value />
+          
           </div>
         </div>
       </div>
@@ -24,6 +25,7 @@
 
 export default {
   name: 'MovieComponent',
+ 
   props: {
     img:String,
     country: String,
@@ -31,8 +33,9 @@ export default {
     originalTitle: String,
     language: String,
     score: Number,
-  },
-
+    value:Number
+  }
+  
 }
 </script>
 
