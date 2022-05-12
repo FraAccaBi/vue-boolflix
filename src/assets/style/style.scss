@@ -1,0 +1,17 @@
+.card{
+    width: calc(100vw / 5);
+    
+    .hidden{
+    opacity: 0;
+    padding-left: 0.5rem;
+    padding-bottom: 0.5rem;
+    background-color: #212529ad;
+    width: 100%;
+        &:hover{
+        opacity: 1;
+        }
+    }
+    img{
+        min-height: fit-content;
+    }
+  }

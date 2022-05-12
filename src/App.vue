@@ -28,7 +28,7 @@ export default {
   height: 100vh;
 }
 .header{
-  max-height: calc(100vh / 6);
+  max-height: calc(100vh / 5);
 }
 .main{
   
